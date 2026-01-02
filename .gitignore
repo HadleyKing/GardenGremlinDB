@@ -1,6 +1,15 @@
+#General 
+**.DS_Store**
 
-**.DS_Store
-# #Biolerplat
+# Client
+client/node_modules
+
+# Server items
+server/env
+server/db.sqlite3
+server/.secrets
+
+# #Biolerplate Python ignores
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
