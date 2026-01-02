@@ -27,8 +27,9 @@ router = DefaultRouter()
 router.register(r"system", SystemViewSet, basename="system")
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("", include(router.urls)),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("accounts.urls")),
     \
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
