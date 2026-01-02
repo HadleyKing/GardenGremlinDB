@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/HadleyKing/GardenGremlinDB/refs/heads/main/server/utilities/json_schemas/0.1/roses_model.json",
+    "title": "roses_model",
+    "version": "1.7.1",
+    "type": "object",
+    "required": [],
+    "definitions": {},
+    "properties": {
+        "breeder": {
+            "type": "string",
+            "enum": [
+                "David Austin",
+                "Heirloom",
+                "Meilland"
+            ]
+        },
+        "breeder_code": {
+            "type": "string"
+        },
+        "planting_season": {
+            "type": "string",
+            "enum": [
+                "spring",
+                "summer",
+                "fall"
+            ]
+        },
+        "planting_year": {
+            "type": "string"
+        },
+        "color": {
+            "type": "string"
+        },
+        "fragrence": {
+            "type": "string",
+            "enum": [
+                "*",
+                "**",
+                "***"
+            ],
+            "description": "description of streingth of smell\n\nNotes: ranking from least to most (3 stars)"
+        },
+        "us_intro": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "description": "textual description of location"
+        },
+        "bloom_type": {
+            "type": "string",
+            "enum": [
+                "rosette",
+                "full",
+                "cupped. single"
+            ]
+        },
+        "plant_type": {
+            "type": "string",
+            "enum": [
+                "climber",
+                "shrub",
+                "climber",
+                "groundcover"
+            ]
+        },
+        "image": {
+            "type": "string"
+        },
+        "ARS_raiting": {
+            "type": "number"
+        }
+    }
+}

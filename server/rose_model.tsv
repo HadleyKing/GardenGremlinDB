@@ -1,0 +1,15 @@
+								
+Required	Column	Data Type	References	Description	Example Value	Enumerations	Multi-value delimiter	notes
+yes	identifier	string		unique identifier for the organism	123456			
+	variety 	string			Charles Darwin, Emily Bronte			
+	breeder	enumeration						
+	breeder_code							
+	planting_season	enumeration			sping	spring summer fall		
+	planting_year	date						
+	color	string						
+	fragrence	enumeration		description of streingth of smell		1 2 3		ranking from least to most (3 stars)
+	us_intro	date						
+	location	string		textual description of location				
+	bloom_type	enumeration			full	rosette full cupped single		
+	image	file						
+	ARS_raiting	float						

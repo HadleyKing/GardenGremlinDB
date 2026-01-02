@@ -9,20 +9,21 @@ import argparse
 
 
 __version__ = "0.1"
-__status__ = "TEST"
+__status__ = "BETA"
 
 # Map custom data_type strings to JSON Schema types.
 DATA_TYPE_MAP = {
     "string": "string",
-    "date": "string",      # you might add "format": "date" if desired
+    "date": "string",      # might add "format": "date" if desired
     "integer": "integer",
     "float": "number",
     "boolean": "boolean",
     "object": "object",
     "array": "array",
-    # sometimes you may have types like "enumeration" that you want to map to string with an enum
     "enumeration": "string"
 }
+
+RAW_URL = f"https://raw.githubusercontent.com/HadleyKing/GardenGremlinDB/refs/heads/main/server/utilities/json_schemas/{__version__}"
 
 def usr_args():
     """User supplied arguments for functions
@@ -46,7 +47,7 @@ def usr_args():
     )
     parser.add_argument(
         '-o', '--output',
-        default="utilities/json_schemas/v1.7/",
+        default=f"utilities/json_schemas/{__version__}/",
         help="output directory"
     )
     if len(sys.argv) <= 1:
@@ -74,11 +75,10 @@ def convert_column(column: dict) -> dict:
     # Add enum if provided.
     if "enumerations" in column and column["enumerations"] != "":
         enum_val = column["enumerations"]
-        enum_val = enum_val.split(",")
+        enum_val = [val.strip() for val in enum_val.split(",")]
         if not isinstance(enum_val, list):
             enum_val = [enum_val]
         base_schema["enum"] = enum_val
-        # import pdb; pdb.set_trace()
 
     # Add description and append notes if provided.
     description = column.get("description", "")
@@ -122,11 +122,10 @@ def table_2_schema(input_file: str, out_dir:str)-> dict:
     """Create Schema JSON
     """
 
-    raw_url = "https://raw.githubusercontent.com/UCI-GREGoR/GREGor_dashboard/blob/main/server/utilities/v1.7/json_schemas"
     table_name = input_file.split("/")[-1].split(".")[0]
     table_schema = {
         '$schema': 'http://json-schema.org/draft-07/schema#',
-        '$id': f"{raw_url}/{table_name}.json",
+        '$id': f"{RAW_URL}/{table_name}.json",
         'title': table_name,
         'version': "1.7.1", #data["version"],
         'type': 'object',
@@ -140,8 +139,8 @@ def table_2_schema(input_file: str, out_dir:str)-> dict:
         next(data)
         headers = next(data)
         next(data)
-        
         for line in data:
+            # import pdb; pdb.set_trace()
             result_dict = dict(zip(property_keys, line))
             if result_dict["required"] == "yes":
                 table_schema["required"].append(result_dict["column"])
